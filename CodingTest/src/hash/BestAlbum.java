@@ -8,9 +8,9 @@ public class BestAlbum {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		String[] genres = {"classic","pop", "classic", "classic", "pop"};
-//		String[] genres = {"a", "a","a", "b", "b", "c"};
+		String[] genres = {"a", "a","a", "b", "b", "c"};
 //		String[] genres = {"classic","pop", "classic", "classic", "pop", "hip"};
-//		int[] plays = {100, 200, 250, 300, 400, 500};
+		int[] plays = {100, 200, 250, 300, 400, 600};
 //		int[] plays = {500, 600, 150, 800, 2500};
 //		int[] plays = {500, 600, 150, 800, 2500, 1300};
 		//기대값 : 4,1,3,0
@@ -22,8 +22,8 @@ public class BestAlbum {
 //		String[] genres = {"classic", "pop", "classic", "classic", "pop", "zazz", "zazz"};
 //		int[] plays = {500, 600, 150, 800, 2500, 2100, 1000};
 //				[4, 1, 5, 6, 3, 0]
-		String[] genres = {"classic", "pop", "classic", "pop", "classic", "classic"};
-		int[] plays = {400, 600, 150, 2500, 500, 500};
+//		String[] genres = {"classic", "pop", "classic", "pop", "classic", "classic", "classic"};
+//		int[] plays = {400, 600, 150, 2500, 500, 500, 500};
 //				[3, 1, 4, 5]
 		int[] a = solution(genres,plays);
 		for(int b : a) {
@@ -54,7 +54,6 @@ public class BestAlbum {
 	
 	
 	public static int[] solution(String[] genres, int[] plays) {
-		int[] answer = {};
 		
 		HashMap<String, Integer> hash1 = new HashMap<>();
 		for(int i=0; i<genres.length; i++) {
@@ -62,11 +61,19 @@ public class BestAlbum {
 		}
 		System.out.println(hash1 + " hash1");
 		
-		List<String> sortG = new ArrayList<>();
-		for(String gen : hash1.keySet()) {
-			sortG.add(gen);
+		List<Integer> sortP = new ArrayList<>();
+		for(int gen : hash1.values()) {
+			sortP.add(gen);
 		}
-		System.out.println(sortG + " sortG");
+		Collections.sort(sortP); Collections.reverse(sortP);
+		
+		List<String> sortG = new ArrayList<>();
+		for(int s : sortP) {
+			sortG.add(getKey(hash1, s));
+			hash1.remove(getKey(hash1, s));
+		}
+		System.out.println(hash1 + " after hash1");
+ 		System.out.println(sortG + " sortG");
 		
 		HashMap<String, Integer> hash2 = new HashMap<>();
 		for(int i=0; i<genres.length; i++) {
@@ -92,112 +99,50 @@ public class BestAlbum {
 		System.out.println(list + " list");
 		
 		int cnt = 0;
-		String temp = "";
+		String temp = sortG.get(0);
 		
-//		{pop=3100, classic=1550} hash1
-//		[2500, 600, 500, 500, 400, 150] list
-//		{classic0=400, classic2=150, classic4=500, classic5=500, pop1=600, pop3=2500} hash3
+		List<Integer> solve = new ArrayList<>();
+		
 		for(String sg : sortG) {
+			if(!temp.equals(sg)) cnt=0;
 			for(int l : list) {
-				for(String ha : hash3.keySet()) {
-					if(ha.indexOf(sg) >= 0 && hash3.get(ha) == l) {
-						cnt++;
-						System.out.println(ha);
-						if(cnt == 2) {
-							cnt = 0;
-							continue;
-						}
-					}
-				}
 				if(cnt==2) {
 					cnt = 0;
 					break;
 				}
+				for(String ha : hash3.keySet()) {
+					if(cnt==2) break;
+					if(ha.indexOf(sg) >= 0 && hash3.get(ha) == l) {
+						cnt++;
+						solve.add(Integer.parseInt((ha.replace(sg, ""))));
+						temp = sg;
+					}
+				}
+				
 			}
 		}
 		
+		System.out.println(solve);
+		int[] answer = new int[solve.size()];
+		for(int i=0; i<answer.length; i++) {
+			answer[i] = solve.get(i);
+		}
 		return answer;
 	}
-
-   public static <K, V> K getKey(Map<K, V> map, V value) {
-        V com = value;
-        for (K key : map.keySet()) {
+	
+	public static <K, V> K getKey(Map<K, V> map, V value) {
+        for (K key : map.keySet()) { 
             if (value.equals(map.get(key))) {
                 return key;
             }
         }
         return null;
    }
-//   
-//   public static int[] solution(String[] genres, int[] plays) {
-//        
-//        
-//        
-//        HashMap<String, Integer> hash1 = new HashMap<String, Integer>();
-//        for(int i=0; i<genres.length; i++) {
-//           hash1.put(genres[i], hash1.getOrDefault(genres[i], 0) + plays[i]);
-//        }
-//        System.out.println(hash1);
-//        List<Integer> list = new ArrayList<Integer>(hash1.values());
-//        Collections.sort(list); Collections.reverse(list);
-//        List<String> sort = new ArrayList<String>();
-//        System.out.println(list);
-//        for(int a : list) {
-//           sort.add(getKey(hash1, a));
-//        }
-//        
-//        HashMap<Integer, String> hash2 = new HashMap<Integer, String>();
-//        for(int i=0; i<genres.length; i++) {
-//           hash2.put(plays[i], genres[i]);
-//        }
-//        List<Integer> playList = new ArrayList<Integer>(plays.length);
-//        for (int play : plays) { playList.add(play); }
-//        Collections.sort(playList); Collections.reverse(playList);
-//        
-//        List<Integer> realList = new ArrayList<Integer>();
-//        for(String forSort : sort) {
-//           for(int forPlayList : playList) {
-//              if(hash2.get(forPlayList).equals(forSort)) {
-//                 realList.add(forPlayList);
-//              }
-//           }
-//        }
-////        {100, 200, 300, 400, 500};
-//        System.out.println(sort);	//b c a
-//        System.out.println(realList);	//400,300,500,200,100
-//        
-//        List<Integer> li = new ArrayList<Integer>();
-//        int temp = 0;
-//        String past = sort.get(0);
-//        for(int real : realList) {
-//           if(temp <= 1 && past.equals(hash2.get(real))) {
-//              li.add(real);
-//              temp++;
-//              past = hash2.get(real);
-//           }else if(temp == 2){
-//              temp = 0;
-//           }
-//           if(!past.equals(hash2.get(real))) {
-//              li.add(real);
-//              temp++;
-//              past = hash2.get(real);
-//           }
-//        }
-//        
-//        System.out.println(li);
-//        int[] answer = new int[li.size()];
-//        
-//        int cnt = 0;
-//        for(int i=0; i<li.size(); i++) {
-//        	for(int j=0; j<plays.length; j++) {
-//        		if(li.get(i)==plays[j]) {
-//        			answer[cnt] = j;
-//        			cnt++;
-//        		}
-//        	}
-//        }
-//        return answer;
-//    }
+
+//	
+//
+	
+
 
 }
 		
