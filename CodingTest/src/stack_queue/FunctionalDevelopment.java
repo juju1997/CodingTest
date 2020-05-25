@@ -6,14 +6,14 @@ public class FunctionalDevelopment {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		int[] progress = {93,30,55};
-//		int[] speeds = {1,30,5};
+		int[] progress = {93,30,55};
+		int[] speeds = {1,30,5};
 		
 //		int[] progress = {93,30,55,60};
 //		int[] speeds = {1,30,5,40};	//[2,2]
 		
-		int[] progress = {40,93,30,55,60,65};
-		int[] speeds = {60,1,30,5,10,7};	//[1,2,3]
+//		int[] progress = {40,93,30,55,60,65};
+//		int[] speeds = {60,1,30,5,10,7};	//[1,2,3]
 		
 //		int[] progress = {93,30,55,60,40,65};
 //		int[] speeds = {1,30,5,10,60,7};	//[2,4]
@@ -54,20 +54,33 @@ public class FunctionalDevelopment {
         			date=0;
         		}
         	}else {
-        		pros.poll();
-        		date++;
-        		for(int i=0; i<pros.size(); i++) {
+        		while(!pros.isEmpty()) {
         			Program prog = pros.peek();
-        			if(prog.progress < 100) {
-        				break;
-        			}else {
+        			if(prog.progress >= 100) {
+        				System.out.println(pros.peek().progress);
         				pros.poll();
         				date++;
+        			}else {
+        				break;
         			}
         		}
+        		
+        		
+//        		for(int i=0; i<=pros.size(); i++) {
+//        			Program prog = pros.peek();
+//        			if(prog.progress >= 100) {
+//        				System.out.println(pros.peek().progress);
+//        				pros.poll();
+//        				date++;
+//        			}else {
+//        				break;
+//        			}
+//        		}	//담고 다시 else로 빠진다?
+        		System.out.println(date);
         		list.add(date);
         	}
         }
+        
         int[] answer = new int[list.size()];
         for(int i=0; i<answer.length; i++) {
         	answer[i] = list.get(i);
