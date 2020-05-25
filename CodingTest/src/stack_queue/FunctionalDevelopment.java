@@ -64,19 +64,6 @@ public class FunctionalDevelopment {
         				break;
         			}
         		}
-        		
-        		
-//        		for(int i=0; i<=pros.size(); i++) {
-//        			Program prog = pros.peek();
-//        			if(prog.progress >= 100) {
-//        				System.out.println(pros.peek().progress);
-//        				pros.poll();
-//        				date++;
-//        			}else {
-//        				break;
-//        			}
-//        		}	//담고 다시 else로 빠진다?
-        		System.out.println(date);
         		list.add(date);
         	}
         }
