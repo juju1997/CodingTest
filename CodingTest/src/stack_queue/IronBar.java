@@ -48,12 +48,3 @@ image0.png
         
     }
 }
-
-class Lazor{
-	int laz;
-	int thick;
-	public Lazor(int laz, int thick) {
-		this.laz = laz;
-		this.thick = thick;
-	}
-}
