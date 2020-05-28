@@ -73,7 +73,6 @@ class Heap {	//MinimumHeap
             p = p / 2;
         }
     }
-
     public int delete() {
         if (heap.size() <= 1)
             return 0;
