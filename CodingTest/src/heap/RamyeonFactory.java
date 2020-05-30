@@ -1,18 +1,32 @@
 package heap;
 
+import java.util.*;
+
 public class RamyeonFactory {
 
 	public static void main(String[] args) {
-		int stock = 4;
-		int[] dates = {4,10,15};
-		int[] supplies = {20,5,10};
-		int k = 30;
+//		int stock = 4;
+//		int[] dates = {4,10,15};
+//		int[] supplies = {20,5,10};
+//		int k = 30;
 		//result = 2
 		
-//		int stock = 4;
-//		int[] dates = {1,2,3,4};
-//		int[] supplies = {1,1,1,1};
-//		int k = 6;
+//		int stock = 10;
+//		int[] dates = {5,10};
+//		int[] supplies = {1,100};
+//		int k = 100;
+		//result = 1
+		
+//		int stock = 2;
+//		int[] dates = {1};
+//		int[] supplies = {10};
+//		int k = 10;
+		//result = 1
+		
+		int stock = 4;
+		int[] dates = {1,2,3,4};
+		int[] supplies = {1,1,1,1};
+		int k = 6;
 //		결과 : 2
 
 		solution(stock, dates, supplies, k);
@@ -40,8 +54,20 @@ public class RamyeonFactory {
 	 * */
 	public static int solution(int stock, int[] dates, int[] supplies, int k) {
         int answer = 0;
-        //k-1 까지의 밀가루만 충분하면 된다.
-        
+        PriorityQueue<Integer> facQ = new PriorityQueue<Integer>(Comparator.reverseOrder());
+        int in = 0;
+        for(int i=0; i<k; i++) {	//날짜의 경과
+        	if(in<dates.length && i==dates[in]) {
+        		facQ.offer(supplies[in]);
+        		in++;
+        	}
+        	if(stock == 0) {
+        		stock+=facQ.poll();
+        		answer++;
+        	}
+        	stock--;
+        }
+        System.out.println(answer);
         return answer;
     }
 }
