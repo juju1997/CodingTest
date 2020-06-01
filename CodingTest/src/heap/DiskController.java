@@ -24,31 +24,32 @@ public class DiskController {
 	 * */
 	
 	public static int solution(int[][] jobs) {
-        int answer = 0;
         
         PriorityQueue<Disk> before = new PriorityQueue<>();	//프로세싱 전 
-        List<Disk> ing = new LinkedList<>();	//프로세싱 중 
-        List<Integer> after = new ArrayList<>();	//프로세싱 끝 
+        List<Disk> after = new ArrayList<>();	//프로세싱 끝 
         
         for(int i=0; i<jobs.length; i++) {
         	before.offer(new Disk(jobs[i][0], jobs[i][1]));
         }
         
-//        while(!before.isEmpty()) {
-//        	System.out.println(before.poll());
-//        }
-        
-        // RealStart + Length - HopeStart
-        int rs = 0;	//RealStart
-        int ed = 0; //endTime
-        System.out.println(before);
-        while(!before.isEmpty()) {
-        	Disk d = before.poll();
-        	answer += rs+d.time-d.priority;
-        	rs += d.time;
+        for(int i=0; i<jobs.length; i++) {
+        	after.add(before.poll());
         }
-        System.out.println(answer/jobs.length);
-        return answer/jobs.length;
+        System.out.println(after);
+        int rs = 0;
+        int et = 0;
+        while(after.size() > 0) {
+        	for(int i=0; i<after.size(); i++) {
+        		if(rs >= after.get(i).priority) {	//프로세스의 시작시간이 현재 진행속도보다 작거나 같으면 
+        			rs+=after.get(i).time;
+        			et+=rs-after.get(i).priority;
+        			after.remove(i);
+        			break;
+        		}
+        		if (i == after.size()-1) rs++;
+        	}
+        }
+        return et/jobs.length;
     }
 
 }
@@ -61,7 +62,12 @@ class Disk implements Comparable<Disk>{
 	}
 	@Override
 	public int compareTo(Disk d) {
-		return this.priority >= d.priority ? 1 : -1;
+		if (this.time < d.time) return -1;
+        else if (this.time == d.time) {
+            if (this.priority < d.priority) return -1;
+            else return 1;
+        }else return 1;
+		
 	}
 	@Override
 	public String toString() {
