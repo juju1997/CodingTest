@@ -9,7 +9,7 @@ public class DiskController {
 //				9
 //		int[][] jobs = {{24, 10}, {18, 39}, {34, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 2}, {15, 34}, {35, 43}, {26, 1}};
 //				74
-//		int[][] jobs = {{24, 10}, {18, 39}, {34, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}}
+//		int[][] jobs = {{24, 10}, {18, 39}, {34, 20}, {37, 5}, {47, 22}, {20, 47}, {15, 34}, {15, 2}, {35, 43}, {26, 1}};
 //				74
 		solution(jobs);
 	}
@@ -34,9 +34,21 @@ public class DiskController {
         	before.offer(new Disk(jobs[i][0], jobs[i][1]));
         }
         
+//        while(!before.isEmpty()) {
+//        	System.out.println(before.poll());
+//        }
         
-        
-        return answer;
+        // RealStart + Length - HopeStart
+        int rs = 0;	//RealStart
+        int ed = 0; //endTime
+        System.out.println(before);
+        while(!before.isEmpty()) {
+        	Disk d = before.poll();
+        	answer += rs+d.time-d.priority;
+        	rs += d.time;
+        }
+        System.out.println(answer/jobs.length);
+        return answer/jobs.length;
     }
 
 }
@@ -48,14 +60,8 @@ class Disk implements Comparable<Disk>{
 		this.time = time;
 	}
 	@Override
-	public int compareTo(Disk o) {
-		if(this.time > time) {
-            return 1;
-        } else if (this.time < time) {
-            return -1;
-        } else {
-            return 0;
-        }
+	public int compareTo(Disk d) {
+		return this.priority >= d.priority ? 1 : -1;
 	}
 	@Override
 	public String toString() {
