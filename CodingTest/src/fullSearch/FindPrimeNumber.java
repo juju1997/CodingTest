@@ -7,8 +7,8 @@ public class FindPrimeNumber {
 	public static void main(String[] args) {
 //		String numbers = "17";
 //		String numbers = "011";
-//		String numbers = "13579";
-		String numbers = "777";
+		String numbers = "13579";
+//		String numbers = "777";
 		
 		solution(numbers);
 	}
@@ -27,14 +27,12 @@ public class FindPrimeNumber {
         int answer = 0;
         //3*1 , 3*2, 3*3 팩토리얼 순열
         String[] strArr = numbers.split("");
-        
         Set<Integer> set=new HashSet<>();
         //1부터 만들 수 있는 최대 길이까지 숫자 조합
         for(int i=1;i<=strArr.length;i++){
             perm(strArr, 0, i, set);
         }
         answer=set.size();
-        System.out.println(answer);
         return answer;
     }
 	
@@ -61,8 +59,8 @@ public class FindPrimeNumber {
 	        for(int i=0;i<k;i++){
 	            s.append(arr[i]);//숫자연결하기
 	        }
-//	        System.out.println(s);
-	        System.out.println(set);
+	        System.out.println(s  +"ㄴ");
+//	        System.out.println(set);
 	        primeNumber(set, s);
 	    }
 	    public static void primeNumber(Set<Integer> set, StringBuilder s){//소수 체크
