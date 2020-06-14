@@ -4,9 +4,9 @@ public class GymSuit {
 
 	public static void main(String[] args) {
 		
-		int n = 5;
-		int[] lost = {2,4};
-		int[] reserve = {1,3,5};
+//		int n = 5;
+//		int[] lost = {2,4};
+//		int[] reserve = {1,3,5};
 		//5
 		
 //		int n = 5;
@@ -16,8 +16,12 @@ public class GymSuit {
 		
 //		int n = 3;
 //		int lost[] = {3};
-//		int reserve = {1};
-		//1
+//		int reserve[] = {1};
+		//2
+		
+		int n = 5;
+		int lost[] = {3};
+		int reserve[] = {3,4};
 		
 		solution(n, lost, reserve);
 	}
@@ -43,7 +47,19 @@ public class GymSuit {
 	 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.
 	 * */
 	public static int solution(int n, int[] lost, int[] reserve) {
-        int answer = 0;
+        int answer = n-lost.length;
+        
+        int length = 0;
+        if(lost.length>reserve.length) { length = reserve.length; }
+        else if(lost.length<reserve.length) { length = lost.length; }
+        else { length = reserve.length; }
+        
+        for(int i=0; i<length; i++) {
+        	if(reserve[i]+1==lost[i]) {answer++;}
+        	else if(reserve[i]-1==lost[i]) {answer++;}
+        }
+        System.out.println(answer);
+        
         return answer;
     }
 }
