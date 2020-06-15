@@ -1,5 +1,7 @@
 package greedy;
 
+
+
 public class GymSuit {
 
 	public static void main(String[] args) {
@@ -8,6 +10,21 @@ public class GymSuit {
 //		int[] lost = {2,4};
 //		int[] reserve = {1,3,5};
 		//5
+		
+//		int n = 3;
+//		int lost[] = {3};
+//		int reserve[] = {1};
+		//2
+		
+//		int n = 10;
+//		int[] lost = {3,9,10};
+//		int[] reserve = {3,8,9};
+		//9
+		
+//		int n = 7;
+//		int[] lost = {4,3,2};
+//		int[] reserve = {6,3,1,2};
+		//6
 		
 //		int n = 5;
 //		int lost[] = {2,4};
@@ -22,7 +39,7 @@ public class GymSuit {
 		int n = 5;
 		int lost[] = {3};
 		int reserve[] = {3,4};
-		
+		//5
 		solution(n, lost, reserve);
 	}
 	
@@ -49,17 +66,27 @@ public class GymSuit {
 	public static int solution(int n, int[] lost, int[] reserve) {
         int answer = n-lost.length;
         
-        int length = 0;
-        if(lost.length>reserve.length) { length = reserve.length; }
-        else if(lost.length<reserve.length) { length = lost.length; }
-        else { length = reserve.length; }
+        for(int i=0; i<reserve.length; i++) {
+        	for(int j=0; j<lost.length; j++) {
+        		if(reserve[i]==lost[j]) {
+        			reserve[i]=-1;
+        			lost[j]=-1;
+        			answer++;
+        			break;
+        		}
+        	}
+        }
         
-        for(int i=0; i<length; i++) {
-        	if(reserve[i]+1==lost[i]) {answer++;}
-        	else if(reserve[i]-1==lost[i]) {answer++;}
+        for(int i=0; i<lost.length; i++) {
+            for(int j=0; j<reserve.length; j++) {
+                if(lost[i]==reserve[j]+1 || lost[i]==reserve[j]-1) {
+                    answer++;
+                    reserve[j] = -1;
+                    break;
+                }
+            }
         }
         System.out.println(answer);
-        
         return answer;
     }
 }
