@@ -1,6 +1,5 @@
 package greedy;
 
-import java.util.*;
 
 public class MakeLargeNumber {
 
@@ -10,12 +9,12 @@ public class MakeLargeNumber {
 //		int k = 2;
 		//"94"
 		
-		String number = "1231234";
-		int k = 3;
+//		String number = "1231234";
+//		int k = 3;
 		//"3234"
 		
-//		String number = "4177252841";
-//		int k = 4;
+		String number = "4177252841";
+		int k = 4;
 		//"775841"
 		
 		solution(number, k);
@@ -33,27 +32,24 @@ public class MakeLargeNumber {
 	 * */
 	
 	public static String solution(String number, int k) {
-        String answer = "";
-        String[] arr = number.split("");
-        List<String> list = new ArrayList<>();
-        for(String a : arr) {
-        	list.add(a);
-        }
-        String max = "";
-        int maxIndex = 0;
-        while(k>0) {
-        	for(int i=maxIndex; i<list.size()-k; i++) {
-        		
+        String[] arr1 = number.split("");
+        int[] arr = new int[arr1.length]; 
+        for(int i=0; i<arr.length; i++) { arr[i] = Integer.parseInt(arr1[i]); }
+        int cnt = arr.length-k;
+        int left = 0;
+        int right = k+1;
+        StringBuilder sb = new StringBuilder();
+        while(cnt>0) {
+        	int max = 0;
+        	for(int i=left; i<right; i++) {
+        		if(arr[i]>max) {
+        			max = arr[i];
+        			left=i+1;
+        		}
         	}
-        	Collections.sort(list); Collections.reverse(list);
-        	max = list.get(0);
-        	maxIndex = list.indexOf(max);
-        	answer+=max;
-        	k--;
+        	sb.append(max);
+        	right++; cnt--;
         }
-        System.out.println(answer);
-        
-        
-        return answer;
+        return sb.toString();
     }
 }
