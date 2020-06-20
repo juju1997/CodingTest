@@ -32,7 +32,7 @@ public class JoyStick {
         		
         		System.out.println("commit for commit Sorry!s");
         	}else {
-        		
+        		System.out.println("commit for commit");
         	}
         }
         
