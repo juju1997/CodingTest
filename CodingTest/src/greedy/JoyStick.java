@@ -30,9 +30,7 @@ public class JoyStick {
         for(int i=1; i<intArr.length; i++) {
         	if(intArr[i]!=A) {
         		
-        		System.out.println("commit for commit Sorry!s");
         	}else {
-        		System.out.println("commit for commit");
         	}
         }
         
