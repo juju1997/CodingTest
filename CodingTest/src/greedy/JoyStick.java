@@ -30,6 +30,7 @@ public class JoyStick {
         for(int i=1; i<intArr.length; i++) {
         	if(intArr[i]!=A) {
         		System.out.println("zenProject중 ...아오,,,");
+        		
         	}else {
         	}
         }
