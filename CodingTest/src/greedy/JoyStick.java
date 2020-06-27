@@ -29,7 +29,7 @@ public class JoyStick {
         //정상진행 right 비정상진행 left 
         for(int i=1; i<intArr.length; i++) {
         	if(intArr[i]!=A) {
-        		System.out.println("zenProject중 ...아오,,,,,");
+        		System.out.println("zenProject중 ...아오,,,,,,");
         		
         	}else {
         	}
