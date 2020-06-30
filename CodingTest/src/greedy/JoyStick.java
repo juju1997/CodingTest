@@ -29,7 +29,6 @@ public class JoyStick {
         //정상진행 right 비정상진행 left 
         for(int i=1; i<intArr.length; i++) {
         	if(intArr[i]!=A) {
-        		
         	}else {
         	}
         }
@@ -43,8 +42,6 @@ public class JoyStick {
         		if(intArr[i] < mid) {	//주어진 값이 중간값이랑 가까울 A까지 -하면서 가야함 
         			answer += (intArr[i]-A);
         		}else {	//주어진 값이 중간값보다 멀때 +하면서 가야함
-        			
-        			
         		}
         	}
         	answer++;
