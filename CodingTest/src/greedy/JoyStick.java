@@ -33,7 +33,6 @@ public class JoyStick {
         	}
         }
         
-        
         for(int i=0; i<arr.length; i++) {
         	if(intArr[i]==65) { 
         		answer++;
