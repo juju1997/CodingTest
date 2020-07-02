@@ -45,8 +45,6 @@ public class JoyStick {
         	}
         	answer++;
         }
-        
-        System.out.println(answer);
         return answer;
     }
 
