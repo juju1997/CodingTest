@@ -7,10 +7,10 @@ public class JoyStick {
 	public static void main(String[] args) {
 //		String name = "JEROEN";
 //		//56
-//		String name = "JAN";
+		String name = "JAN";
 //		23
-		String name = "JAZ";
-		//11
+//		String name = "JAZ";
+//		11
 		solution(name);
 	}
 	
