@@ -1,13 +1,19 @@
 package greedy;
 
+import java.util.*;
+
 public class LifeBoat {
 
 	public static void main(String[] args) {
-		int[] people = {70,50,80,50};
-		int limit = 100;
-		//3
-//		int[] people = {70,80,50};
+		
+//		int[] people = {10,10,20,30,40,50};
 //		int limit = 100;
+		//2
+//		int[] people = {70,50,80,50};
+//		int limit = 100;
+		//3
+		int[] people = {70,80,50};
+		int limit = 100;
 		//3
 		
 		solution(people, limit);
@@ -30,7 +36,23 @@ public class LifeBoat {
 	
 	public static int solution(int[] people, int limit) {
         int answer = 0;
-        System.out.println("hello worlrd");
+        int inBoat = 0;
+        LinkedList<Integer> list = new LinkedList<>();
+        for(int p : people) list.add(p);
+        Collections.sort(list);
+        while(!(list.isEmpty())) {
+        	int person = list.poll();
+        	inBoat += person;
+        	if(inBoat > limit) {
+        		list.add(person);
+        		Collections.sort(list);
+        		answer++;
+        		inBoat = 0;
+        	}
+        	if(inBoat<100 && list.size()==0) {
+        		answer++; break;
+        	}
+        }
         return answer;
     }
 
