@@ -36,23 +36,20 @@ public class LifeBoat {
 	
 	public static int solution(int[] people, int limit) {
         int answer = 0;
-        int inBoat = 0;
-        LinkedList<Integer> list = new LinkedList<>();
-        for(int p : people) list.add(p);
-        Collections.sort(list);
-        while(!(list.isEmpty())) {
-        	int person = list.poll();
-        	inBoat += person;
-        	if(inBoat > limit) {
-        		list.add(person);
-        		Collections.sort(list);
+        Arrays.sort(people);
+        int maxIndex = people.length - 1;
+        for(int minIndex = 0; minIndex <= maxIndex; minIndex++) {
+        	if(people[minIndex] + people[maxIndex] > limit) {
         		answer++;
-        		inBoat = 0;
+        		maxIndex--;
+        		minIndex--;
         	}
-        	if(inBoat<100 && list.size()==0) {
-        		answer++; break;
+        	else if(people[minIndex] + people[maxIndex] <= limit) {
+        		answer++;
+        		maxIndex--;
         	}
         }
+        System.out.println(answer);
         return answer;
     }
 
